@@ -7,6 +7,7 @@
 <title>자유 게시판</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
+
 </head>
 
 <body>
@@ -94,7 +95,6 @@
 		<td bgcolor="#ededed" height="1" colspan="11"
 			style="overflow: hidden; padding: 0px"></td>
 	</tr>
-
 
 	<tr>
 		<td class="bg_board_title_02" height="1" colspan="11"
