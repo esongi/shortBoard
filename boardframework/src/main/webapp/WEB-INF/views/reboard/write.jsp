@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/public.jsp" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="ko">
-<head>
-<title>게시판 글쓰기</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
 <script type="text/javascript">
 function writeArticle(){
 	// trim 이 널?
@@ -22,14 +16,7 @@ function writeArticle(){
 	}
 }
 </script>
-</head>
 
-<body>
-
-<input type="hidden" name="bcode" value="{param.bcode}">
-<input type="hidden" name="pg" value="1">
-<input type="hidden" name="key" value="">
-<input type="hidden" name="word" value="">
 
 <!-- title -->
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -62,10 +49,10 @@ function writeArticle(){
 	style="margin: 0px">
 <div id="attach_file_hdn"></div>
 
-<input type="hidden" name="" value="">
-<input type="hidden" name="" value="">
-<input type="hidden" name="" value="">
-<input type="hidden" name="" value="">
+<input type="hidden" name="bcode" value="${bcode}">
+<input type="hidden" name="pg" value="1">
+<input type="hidden" name="key" value="">
+<input type="hidden" name="word" value="">
 
 <table border="0" cellpadding="5" cellspacing="0" width="630"
 	style="table-layout: fixed">

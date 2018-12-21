@@ -1,43 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/public.jsp" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="ko">
-<head>
-<title>글입력 성공</title>
+<%@ include file="/WEB-INF/views/common/public.jsp"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
-</head>
+<c:choose>
+	<c:when test="${errorMsg !=null }">
+		<font color="red" size=15>${errorMsg}</font>
+	</c:when>
+	<c:otherwise>
 
-<body>
+		<script>
+		control = "${root}/reboard/";
+		
+		initVars();
+		
+			$(document).ready(function() {
+				
+				$("#viewBtn").click(function() {
+					$("#seq").val("${wseq}");
+					// form 데이터이기에 submit로 제출해야한다
+					$("#commonForm").attr("method", "get").attr("action", viewpath).submit();
+				});
 
-<table width="100%" cellpadding="6" cellspacing="2" border="0"
-	bgcolor="#ffffff" style="border: #e1e1e1 solid 1px">
-	<tr>
-		<td class="bg_board_title" width="100%"><img
-			src="${root}/img/board/icon_arrow_08.gif" width="3" height="11"
-			border="0" align="absmiddle" hspace="6" vspace="6"> <b>게시판</b>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" bgcolor="#e1e1e1"
-			style="overflow: hidden; padding: 0px;"></td>
-	</tr>
-	<tr>
-		<td class="bg_menu" width="100%" style="padding: 25px" height="35"
-			align="center"><b>게시물이 등록되었습니다.</b><br>
+				$("#listBtn").click(function() {
+					$("#commonForm").attr("method", "get").attr("action", listpath).submit();
+				});
+			});
+		</script>
+
+		<table width="100%" cellpadding="6" cellspacing="2" border="0"
+			bgcolor="#ffffff" style="border: #e1e1e1 solid 1px">
+			<tr>
+				<td class="bg_board_title" width="100%"><img
+					src="${root}/img/board/icon_arrow_08.gif" width="3" height="11"
+					border="0" align="absmiddle" hspace="6" vspace="6"> <b>게시판</b>
+				</td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="#e1e1e1"
+					style="overflow: hidden; padding: 0px;"></td>
+			</tr>
+			<tr>
+				<td class="bg_menu" width="100%" style="padding: 25px" height="35"
+					align="center"><b>게시물이 등록되었습니다.</b><br> <br>
+
+					<div align="center">
+						<img src="${root}/img/board/b_wirtecf.gif" width="91" height="21"
+							border="0" align="absmiddle" alt="작성한 글 확인" hspace="10"
+							id="viewBtn">
+							 <img src="${root}/img/board/poll_listbu1.gif"
+							width="62" height="21" border="0" align="absmiddle" alt="목록보기"
+							hspace="10" id="listBtn"></td>
+			</tr>
+		</table>
 		<br>
 
-		<div align="center"><a href=""><img
-			src="${root}/img/board/b_wirtecf.gif" width="91" height="21"
-			border="0" align="absmiddle" alt="작성한 글 확인" hspace="10"></a><a
-			href=""><img src="${root}/img/board/poll_listbu1.gif"
-			width="62" height="21" border="0" align="absmiddle" alt="목록보기"
-			hspace="10"></a>
-		</td>
-	</tr>
-</table>
-<br>
-</body>
-</html>
+		</body>
+		</html>
+
+	</c:otherwise>
+</c:choose>

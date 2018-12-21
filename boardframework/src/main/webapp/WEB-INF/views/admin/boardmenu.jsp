@@ -38,11 +38,10 @@
 	text-decoration: underline;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
+
 
 <script type="text/javascript">
+
 	$(document).ready(
 			function() {
 				$("#boardmenu p.menu_category").click(
@@ -65,7 +64,7 @@
 				<c:set var="idx" value="${board.ccode}" />
 				<div class="menu_body">
 			</c:if>
-			<a href="${root}/${board.control}/write.bit?bcode=${board.bcode}&pg=1&key=&word=">${board.bname}</a>
+			<a href="${root}/${board.control}/list.bit?bcode=${board.bcode}&pg=1&key=&word=">${board.bname}</a>
 			<c:if test="${i.index < menu.size() - 1}">
 				<c:if test="${idx != menu.get(i.index+1).ccode }">
 	</div>
