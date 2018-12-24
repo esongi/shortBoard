@@ -35,12 +35,51 @@
 			from board b, reboard r
 			where b.seq = r.seq
 			and b.bcode = #{bcode}
-			order by seq desc
+			
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="key == 'subject'">
+					and b.subject like '%'||#{word}||'%'
+					</when>
+					<otherwise>
+					and b.${key} = #{word}
+					</otherwise>
+				</choose>
+			</if>
+			
+			order by ref desc, step
 			) a 
 		where rownum &lt;= #{end}
 		) b  
 	where  b.rn &gt; #{start}
   </select>
   
+  
+ <update id="updateStep" parameterType="reboardDto">
+
+ update reboard
+ set step = step + 1
+ where ref = #{ref}
+ and step > #{step}
+
+ </update> 
+ 
+ <insert id="replyArticle" parameterType="reboardDto">
+ 
+ insert all
+  	into board ( seq, name, id, email, subject, content, hit, logtime, bcode)
+  	values ( #{seq}, #{name}, #{id}, #{email}, #{subject}, #{content}, 0, sysdate, #{bcode})
+  	into reboard ( rseq, seq, ref, lev, step, pseq, reply)
+  	values ( reboard_rseq.nextval, #{seq}, #{ref}, #{ref}+1, #{step}+1, #{pseq}, 0)
+  select * from dual
+  
+ </insert>
+  
+ <update id="updateReply" parameterType="int">
+	update reboard
+	set reply = reply + 1
+	where seq = #{pseq} 
+ 
+ </update> 
   
   </mapper>

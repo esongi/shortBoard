@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.bit.board.dao.ReboardDao;
 import com.bit.board.model.ReboardDto;
 import com.bit.common.dao.CommonDao;
@@ -44,16 +45,33 @@ public class ReboardServiceImpl implements ReboardService {
     ReboardDto reboardDto = sqlSession.getMapper(ReboardDao.class).viewArticle(seq);
 
     if (reboardDto != null) {
-      reboardDto.setContent(reboardDto.getContent().replace("\n", "<br>"));
       sqlSession.getMapper(CommonDao.class).updateHit(seq);
+      reboardDto.setContent(reboardDto.getContent().replace("\n", "<br>"));
     }
 
     return reboardDto;
   }
 
   @Override
+  public ReboardDto getArticle(int seq) {
+    return sqlSession.getMapper(ReboardDao.class).viewArticle(seq);
+  }
+
+
+  @Transactional
+  @Override
   public int replyArticle(ReboardDto reboardDto) {
-    return 0;
+    int seq = sqlSession.getMapper(CommonDao.class).getNextSeq();
+    reboardDto.setSeq(seq);
+  
+    // 순서대로 진행되어야 한다
+    ReboardDao reboardDao = sqlSession.getMapper(ReboardDao.class);
+   
+    reboardDao.updateStep(reboardDto);
+    reboardDao.replyArticle(reboardDto);
+    reboardDao.updateReply(reboardDto.getPseq());
+    
+    return seq;
   }
 
   @Override
@@ -67,6 +85,19 @@ public class ReboardServiceImpl implements ReboardService {
     // TODO Auto-generated method stub
 
   }
+
+  @Override
+  public void updateStep(ReboardDto reboardDto) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public int updateReply(int pseq) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
 
 
 }

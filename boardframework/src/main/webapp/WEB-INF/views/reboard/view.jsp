@@ -24,6 +24,13 @@
 										"action", writepath).submit();
 							});
 					
+					$(".replyBtn").click(
+							function() {
+								$("#seq").val("${article.seq}");
+								$("#commonForm").attr("method", "get").attr(
+										"action", replypath).submit();
+							});
+					
 					$(".newpage").click(
 							function() {
 								$("#pg").val(1);
@@ -66,7 +73,7 @@
 					src="${root}/img/board/btn_write_01.gif" width="64" height="22"
 					border="0" align="absmiddle" alt="글쓰기" class="writeBtn"> <img
 					src="${root}/img/board/btn_reply.gif" width="40" height="22"
-					border="0" align="absmiddle" alt="답글"></td>
+					border="0" align="absmiddle" alt="답글" class= "replyBtn"></td>
 
 				<td valign="bottom" width="100%" style="padding-left: 4px"></td>
 				<td align="right" nowrap valign="bottom">
@@ -153,7 +160,7 @@
 					src="${root}/img/board/btn_write_01.gif" width="64" height="22"
 					border="0" align="absmiddle" alt="글쓰기" class="writeBtn"> <img
 					src="${root}/img/board/btn_reply.gif" width="40" height="22"
-					border="0" align="absmiddle" alt="답글"></td>
+					border="0" align="absmiddle" alt="답글" class= "replyBtn"></td>
 					
 			<td style="padding-left: 4px" width="100%"><a href=""
 				target="new"><img src="${root}/img/board/btn_print.gif"
