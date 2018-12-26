@@ -46,7 +46,7 @@ function writeArticle(){
   style="margin: 0px" enctype="multipart/form-data">
 <div id="attach_file_hdn"></div>
 
-<input type="hidden" name="bcode" value="${bcode }">
+<input type="hidden" name="bcode" value="${bcode}">
 <input type="hidden" name="pg" value="1">
 <input type="hidden" name="key" value="">
 <input type="hidden" name="word" value="">
@@ -75,8 +75,10 @@ function writeArticle(){
   <tr>
     <td width="620" nowrap style="padding-left: 8px; padding-top: 10px"
       colspan="5"><img src="${root}/img/board/e_dot.gif" width="4"
-      height="4" border="0" align="absmiddle"> <b>사진</b></td><td>
-      <input type="file" name="picture" id="picture">
+      height="4" border="0" align="absmiddle"> <b>사진</b>
+      </td>
+      <td colspan="5">
+      <input type="file" name="picture" id="picture" />
     </td>
   </tr>
 </table>

@@ -15,7 +15,6 @@ public class BoardAdminServiceImpl implements BoardAdminService {
   @Autowired
   private SqlSession sqlSession;
   
-  
   @Override
   public List<BoardListDto> getBoardMenu() {
     return sqlSession.getMapper(BoardAdminDao.class).getBoardMenu();

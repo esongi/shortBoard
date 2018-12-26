@@ -17,6 +17,9 @@ public class ReboardServiceImpl implements ReboardService {
   @Autowired
   private SqlSession sqlSession;
 
+  // @Autowired
+  // private ReboardDao reboardDao;
+
   @Override
   public int writeArticle(ReboardDto reboardDto) {
     int seq = sqlSession.getMapper(CommonDao.class).getNextSeq();
@@ -43,7 +46,7 @@ public class ReboardServiceImpl implements ReboardService {
   @Override
   public ReboardDto viewArticle(int seq) {
     ReboardDto reboardDto = sqlSession.getMapper(ReboardDao.class).viewArticle(seq);
-
+    // ReboardDto reboardDto = reboardDao.viewArticle(seq);
     if (reboardDto != null) {
       sqlSession.getMapper(CommonDao.class).updateHit(seq);
       reboardDto.setContent(reboardDto.getContent().replace("\n", "<br>"));
@@ -63,14 +66,14 @@ public class ReboardServiceImpl implements ReboardService {
   public int replyArticle(ReboardDto reboardDto) {
     int seq = sqlSession.getMapper(CommonDao.class).getNextSeq();
     reboardDto.setSeq(seq);
-  
+
     // 순서대로 진행되어야 한다
     ReboardDao reboardDao = sqlSession.getMapper(ReboardDao.class);
-   
+
     reboardDao.updateStep(reboardDto);
     reboardDao.replyArticle(reboardDto);
     reboardDao.updateReply(reboardDto.getPseq());
-    
+
     return seq;
   }
 
@@ -89,7 +92,7 @@ public class ReboardServiceImpl implements ReboardService {
   @Override
   public void updateStep(ReboardDto reboardDto) {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
